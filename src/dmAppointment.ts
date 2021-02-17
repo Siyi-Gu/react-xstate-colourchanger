@@ -1,5 +1,9 @@
-import { MachineConfig, send, Action, assign } from "xstate";
-import { stateValuesEqual } from "xstate/lib/State";
+import { MachineConfig, Machine, send, Action, assign } from "xstate";
+import "./styles.scss";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { useMachine, asEffect } from "@xstate/react";
+import { inspect } from "@xstate/inspect";
 
 
 function say(text: string): Action<SDSContext, SDSEvent> {
@@ -106,7 +110,7 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                     target: 'appointment',
                 },
                 {
-                    cond: (context: { intent: string; }) => "timmer" == context.intent,
+                    cond: (context: { intent: string; }) => "timer" == context.intent,
                     target: 'timer',
                 }]
             },
