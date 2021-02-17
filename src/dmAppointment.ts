@@ -49,7 +49,7 @@ const closedAnswer: { [index: string]: {yes?: boolean, no?: boolean}} = {
 /* RASA API
  *  */
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
-const rasaurl = 'https://lab2-for-ds.herokuapp.com/'
+const rasaurl = "https://lab2-for-ds.herokuapp.com/model/parse"
 const nluRequest = (text: string) =>
     fetch(new Request(proxyurl + rasaurl, {
         method: 'POST',
@@ -100,6 +100,7 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
             }
         },
         intent_check: {
+            initial: "prompt",
             on: { 
                 ENDSPEECH: [{
                     cond: (context: { intent: string; }) => "todo" == context.intent,
